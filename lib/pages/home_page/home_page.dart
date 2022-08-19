@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'components/best_seller_grid.dart';
-import 'components/bottom_nav_bar.dart';
 import 'components/category_slider.dart';
 import 'components/home_app_bar.dart';
 import 'components/hot_sales_slider.dart';
@@ -25,7 +24,7 @@ class HomePage extends StatelessWidget {
           BestSellerGrid(),
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      
     );
   }
 }

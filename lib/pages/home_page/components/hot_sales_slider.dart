@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/models/hot_product.dart';
+import '../../product_details_page/product_details_page.dart';
 import '../home_page_model.dart';
 
 class HotSalesSlider extends StatelessWidget {
@@ -103,7 +104,8 @@ class _HotProductCard extends StatelessWidget {
                   width: 98,
                   height: 23,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage.create())),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                     ),
