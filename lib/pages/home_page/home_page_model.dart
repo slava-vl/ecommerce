@@ -24,12 +24,18 @@ class HomePageViewModel with ChangeNotifier {
   int get selectedHotProduct => _selectedHotProduct;
 
   void changeSelectedHotProduct(int index) {
-    _selectedHotProduct = index%data.hotProducts.length;
+    _selectedHotProduct = index % data.hotProducts.length;
     notifyListeners();
   }
 
   void changeSelectedCategoryId(int id) {
     _selectedCategoryId = id;
+    notifyListeners();
+  }
+
+  void toggleLikeModeToBestSellerById(int id) {
+    final product = data.bestProducts.firstWhere((element) => element.id == id);
+    product.isFavorites = !product.isFavorites;
     notifyListeners();
   }
 }

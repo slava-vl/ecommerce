@@ -18,4 +18,6 @@ class HomeDataModel {
   });
 
   factory HomeDataModel.fromJson(Map<String, dynamic> json) => _$HomeDataModelFromJson(json);
+
+  Map<String, dynamic> homeDataModelToJson(HomeDataModel instance) => _$HomeDataModelToJson(instance);
 }

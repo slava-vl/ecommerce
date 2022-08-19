@@ -6,7 +6,7 @@ part 'best_product.g.dart';
 class BestProduct {
   final int id;
   @JsonKey(name: 'is_favorites')
-  final bool isFavorites;
+  bool isFavorites;
   final String title;
   @JsonKey(name: 'price_without_discount')
   final int priceWithoutDiscount;
@@ -24,4 +24,6 @@ class BestProduct {
   });
 
   factory BestProduct.fromJson(Map<String, dynamic> json) => _$BestProductFromJson(json);
+
+  Map<String, dynamic> bestProductToJson(BestProduct instance) => _$BestProductToJson(instance);
 }

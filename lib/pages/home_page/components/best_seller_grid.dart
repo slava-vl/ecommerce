@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/models/best_product.dart';
+import '../../product_details_page/product_details_page.dart';
 import '../home_page_model.dart';
 
 class BestSellerGrid extends StatelessWidget {
@@ -11,7 +12,7 @@ class BestSellerGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bestSellers = context.read<HomePageViewModel>().data.bestProducts;
+    final bestSellers = context.watch<HomePageViewModel>().data.bestProducts;
     return Column(
       children: [
         Row(
@@ -47,68 +48,74 @@ class _BestProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        height: 227,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 168,
-                    child: Image.network(
-                      bestProduct.picture,
-                      errorBuilder: (context, error, stackTrace) => const Center(
-                        child: Text("Picture isn't loaded("),
+    return GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage.create())),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          height: 227,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    SizedBox(
+                      height: 168,
+                      child: Image.network(
+                        bestProduct.picture,
+                        errorBuilder: (context, error, stackTrace) => const Center(
+                          child: Text("Picture isn't loaded("),
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 11,
-                    right: 12,
-                    child: Container(
-                      width: 25,
-                      height: 25,
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 7)],
+                    Positioned(
+                      top: 11,
+                      right: 12,
+                      child: InkWell(
+                        onTap: () => context.read<HomePageViewModel>().toggleLikeModeToBestSellerById(bestProduct.id),
+                        child: Container(
+                          width: 25,
+                          height: 25,
+                          padding: const EdgeInsets.all(7),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 7)],
+                          ),
+                          child: SvgPicture.asset(
+                            bestProduct.isFavorites ? 'assets/like.svg' : 'assets/unlike.svg',
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ),
-                      child: SvgPicture.asset(
-                        bestProduct.isFavorites ? 'assets/like.svg' : 'assets/unlike.svg',
-                        color: Theme.of(context).primaryColor,
-                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '\$${bestProduct.priceWithoutDiscount}',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16),
                     ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    '\$${bestProduct.priceWithoutDiscount}',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(width: 7),
-                  Text(
-                    '\$${bestProduct.discountPrice}',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontSize: 10, decoration: TextDecoration.lineThrough, color: Colors.black.withOpacity(0.3)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
-              Text(
-                bestProduct.title,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 10, color: Colors.black),
-              ),
-              const SizedBox(height: 10),
-            ],
+                    const SizedBox(width: 7),
+                    Text(
+                      '\$${bestProduct.discountPrice}',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 10, decoration: TextDecoration.lineThrough, color: Colors.black.withOpacity(0.3)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  bestProduct.title,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 10, color: Colors.black),
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),

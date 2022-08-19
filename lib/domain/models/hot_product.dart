@@ -23,4 +23,6 @@ class HotProduct {
   });
 
   factory HotProduct.fromJson(Map<String, dynamic> json) => _$HotProductFromJson(json);
+
+  Map<String, dynamic> hotProductToJson(HotProduct instance) => _$HotProductToJson(instance);
 }
