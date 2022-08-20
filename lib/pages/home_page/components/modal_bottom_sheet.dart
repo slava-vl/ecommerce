@@ -5,8 +5,8 @@ class ModalBottomFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle =
-        Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 18, color: Theme.of(context).accentColor);
+    final theme = Theme.of(context);
+    final textStyle = theme.textTheme.bodyMedium!.copyWith(fontSize: 18, color: theme.accentColor);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -28,7 +28,7 @@ class ModalBottomFilter extends StatelessWidget {
                     width: 37,
                     height: 37,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
+                      color: theme.accentColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Icon(Icons.close, color: Colors.white),
@@ -47,11 +47,10 @@ class ModalBottomFilter extends StatelessWidget {
                     height: 37,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text('Done',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 18, color: Colors.white)),
+                    child: Text('Done', style: theme.textTheme.bodyMedium!.copyWith(fontSize: 18, color: Colors.white)),
                   ),
                 ),
               ],

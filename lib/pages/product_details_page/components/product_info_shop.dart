@@ -8,15 +8,16 @@ class ShopInfo extends StatelessWidget {
   const ShopInfo({Key? key}) : super(key: key);
 
   Color getColorFromHex(String hexColor) {
-    hexColor = hexColor.replaceAll("#", "");
+    hexColor = hexColor.replaceAll('#', '');
     if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
+      hexColor = 'FF$hexColor';
     }
-    return Color(int.parse("0x$hexColor"));
+    return Color(int.parse('0x$hexColor'));
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final info = context.read<ProductDetailsPageViewModel>().data;
     final selectedColor = context.select((ProductDetailsPageViewModel model) => model.selectedColor);
     final selectedCapacity = context.select((ProductDetailsPageViewModel model) => model.selectedCapacity);
@@ -35,10 +36,10 @@ class ShopInfo extends StatelessWidget {
         const SizedBox(height: 25),
         Text(
           'Select color and capacity',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 18,
-                color: Theme.of(context).accentColor,
-              ),
+          style: theme.textTheme.bodyMedium!.copyWith(
+            fontSize: 18,
+            color: theme.accentColor,
+          ),
         ),
         const SizedBox(height: 15),
         Row(
@@ -71,16 +72,16 @@ class ShopInfo extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 18),
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
-                        color: selectedCapacity == e ? Theme.of(context).primaryColor : Colors.transparent,
+                        color: selectedCapacity == e ? theme.primaryColor : Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                           child: Text(
                         e,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 13,
-                              color: selectedCapacity == e ? Colors.white : Colors.black.withOpacity(0.2),
-                            ),
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                          fontSize: 13,
+                          color: selectedCapacity == e ? Colors.white : Colors.black.withOpacity(0.2),
+                        ),
                       )),
                     ),
                   ),
@@ -93,7 +94,7 @@ class ShopInfo extends StatelessWidget {
         ElevatedButton(
           onPressed: selectedColor == null || selectedCapacity == null ? null : () {},
           style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).primaryColor,
+              primary: theme.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -103,11 +104,11 @@ class ShopInfo extends StatelessWidget {
             children: [
               Text(
                 'Add to Cart',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 20, color: Colors.white),
+                style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20, color: Colors.white),
               ),
               Text(
                 '\$${info.price}',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 20, color: Colors.white),
+                style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20, color: Colors.white),
               ),
             ],
           ),

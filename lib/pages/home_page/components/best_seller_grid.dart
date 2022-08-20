@@ -12,19 +12,16 @@ class BestSellerGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final bestSellers = context.watch<HomePageViewModel>().data.bestProducts;
     return Column(
       children: [
         Row(
           children: [
             const SizedBox(width: 17),
-            Text('Best Seller', style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25)),
+            Text('Best Seller', style: theme.textTheme.bodyLarge!.copyWith(fontSize: 25)),
             const Spacer(),
-            Text('see more',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Theme.of(context).primaryColor, fontSize: 14)),
+            Text('see more', style: theme.textTheme.bodySmall!.copyWith(color: theme.primaryColor, fontSize: 14)),
             const SizedBox(width: 30),
           ],
         ),
@@ -48,6 +45,7 @@ class _BestProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage.create())),
       child: ClipRRect(
@@ -69,6 +67,19 @@ class _BestProductCard extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) => const Center(
                           child: Text("Picture isn't loaded("),
                         ),
+                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            color: Colors.white,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     Positioned(
@@ -87,7 +98,7 @@ class _BestProductCard extends StatelessWidget {
                           ),
                           child: SvgPicture.asset(
                             bestProduct.isFavorites ? 'assets/like.svg' : 'assets/unlike.svg',
-                            color: Theme.of(context).primaryColor,
+                            color: theme.primaryColor,
                           ),
                         ),
                       ),
@@ -98,12 +109,12 @@ class _BestProductCard extends StatelessWidget {
                   children: [
                     Text(
                       '\$${bestProduct.priceWithoutDiscount}',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16),
+                      style: theme.textTheme.bodyLarge!.copyWith(fontSize: 16),
                     ),
                     const SizedBox(width: 7),
                     Text(
                       '\$${bestProduct.discountPrice}',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      style: theme.textTheme.bodyMedium!.copyWith(
                           fontSize: 10, decoration: TextDecoration.lineThrough, color: Colors.black.withOpacity(0.3)),
                     ),
                   ],
@@ -111,7 +122,7 @@ class _BestProductCard extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   bestProduct.title,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 10, color: Colors.black),
+                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 10, color: Colors.black),
                 ),
                 const SizedBox(height: 10),
               ],

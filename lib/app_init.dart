@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'init_provider.dart';
+import 'pages/cart_page/cart_page_model.dart';
 import 'pages/home_page/home_page_model.dart';
 import 'pages/product_details_page/product_details_page_model.dart';
 import 'pages/splash_page/splash_page.dart';
@@ -25,14 +26,17 @@ class AppInitialization extends StatelessWidget {
                   ChangeNotifierProvider(
                     create: (_) =>
                         HomePageViewModel(homeDataService: context.read<InitializeProvider>().homeDataService),
+                    lazy: false,
                   ),
                   ChangeNotifierProvider(
-                      create: (_) => ProductDetailsPageViewModel(
-                          productDetailDataSrvice: context.read<InitializeProvider>().productDetailDataSrvice))
+                    create: (_) => CartPageViewModel(cartDataSrvice: context.read<InitializeProvider>().cartDataSrvice),
+                    lazy: false,
+                  )
                 ],
                 child: MaterialApp(
                   title: 'Flutter Demo',
                   theme: ThemeData(
+                      scaffoldBackgroundColor: const Color.fromRGBO(248, 248, 248, 1),
                       primaryColor: const Color.fromRGBO(255, 110, 78, 1),
                       accentColor: const Color.fromRGBO(1, 0, 53, 1),
                       textTheme: const TextTheme(

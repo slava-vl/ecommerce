@@ -36,5 +36,4 @@ class ProductDetails {
   factory ProductDetails.fromJson(Map<String, dynamic> json) => _$ProductDetailsFromJson(json);
 
   Map<String, dynamic> productDetailsToJson(ProductDetails instance) => _$ProductDetailsToJson(instance);
-
 }

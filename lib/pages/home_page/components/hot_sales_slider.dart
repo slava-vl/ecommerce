@@ -10,19 +10,16 @@ class HotSalesSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final hotProducts = context.read<HomePageViewModel>().data.hotProducts;
     return Column(
       children: [
         Row(
           children: [
             const SizedBox(width: 17),
-            Text('Hot sales', style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25)),
+            Text('Hot sales', style: theme.textTheme.bodyLarge!.copyWith(fontSize: 25)),
             const Spacer(),
-            Text('see more',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Theme.of(context).primaryColor, fontSize: 14)),
+            Text('see more', style: theme.textTheme.bodySmall!.copyWith(color: theme.primaryColor, fontSize: 14)),
             const SizedBox(width: 30),
           ],
         ),
@@ -52,6 +49,7 @@ class _HotProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Stack(
       children: [
         Container(
@@ -64,6 +62,19 @@ class _HotProductCard extends StatelessWidget {
           child: Image.network(
             hotProduct.picture,
             fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Container(
+                color: Colors.white,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                ),
+              );
+            },
           ),
         ),
         Positioned(
@@ -78,7 +89,7 @@ class _HotProductCard extends StatelessWidget {
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: theme.primaryColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(child: Text('NEW', style: TextStyle(fontSize: 11, color: Colors.white))),
@@ -92,12 +103,11 @@ class _HotProductCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(hotProduct.title,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25, color: Colors.white)),
+                        style: theme.textTheme.bodyLarge!.copyWith(fontSize: 25, color: Colors.white)),
                   ],
                 ),
               ),
-              Text(hotProduct.subtitle,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 11, color: Colors.white)),
+              Text(hotProduct.subtitle, style: theme.textTheme.bodySmall!.copyWith(fontSize: 11, color: Colors.white)),
               const Spacer(),
               if (hotProduct.isBuy)
                 SizedBox(
@@ -112,7 +122,7 @@ class _HotProductCard extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'Buy now!',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 11, color: Colors.black),
+                        style: theme.textTheme.bodyLarge!.copyWith(fontSize: 11, color: Colors.black),
                       ),
                     ),
                   ),

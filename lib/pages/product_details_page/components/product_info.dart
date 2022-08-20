@@ -12,6 +12,7 @@ class ProductInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final info = context.watch<ProductDetailsPageViewModel>().data;
     final selectedSectionBarItem = context.select((ProductDetailsPageViewModel model) => model.selectedSectionBarItem);
     return Container(
@@ -32,7 +33,7 @@ class ProductInfo extends StatelessWidget {
               children: [
                 Text(
                   info.title,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 24),
+                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 24),
                 ),
                 InkWell(
                   onTap: () => context.read<ProductDetailsPageViewModel>().toggleLikeMode(),
@@ -40,7 +41,7 @@ class ProductInfo extends StatelessWidget {
                     width: 37,
                     height: 33,
                     decoration: BoxDecoration(
-                      color: info.isFavorites ? Theme.of(context).primaryColor : Theme.of(context).accentColor,
+                      color: info.isFavorites ? theme.primaryColor : theme.accentColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(

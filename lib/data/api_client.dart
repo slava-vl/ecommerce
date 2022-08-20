@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
+import '../domain/models/cart_model.dart';
 import '../domain/models/home_data_model.dart';
 import '../domain/models/product_details.dart';
 
@@ -15,4 +16,7 @@ abstract class ApiClient {
 
   @GET('6c14c560-15c6-4248-b9d2-b4508df7d4f5')
   Future<ProductDetails> fetchProductDetailData();
+
+  @GET('53539a72-3c5f-4f30-bbb1-6ca10d42c149')
+  Future<CartModel> fetchCartItems();
 }

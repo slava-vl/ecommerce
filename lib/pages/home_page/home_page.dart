@@ -24,7 +24,6 @@ class HomePage extends StatelessWidget {
           BestSellerGrid(),
         ],
       ),
-      
     );
   }
 }

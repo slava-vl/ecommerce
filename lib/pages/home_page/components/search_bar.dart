@@ -25,7 +25,10 @@ class SearchBar extends StatelessWidget {
                 color: theme.primaryColor,
               ),
               const SizedBox(width: 25),
-              Text('Search',style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 12),)
+              Text(
+                'Search',
+                style: theme.textTheme.bodySmall!.copyWith(fontSize: 12),
+              )
             ],
           ),
         ),

@@ -8,6 +8,7 @@ class SectionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer<ProductDetailsPageViewModel>(
       builder: (context, sectionBarService, child) {
         final sectionBarItems = sectionBarService.sectionBarItems;
@@ -25,22 +26,22 @@ class SectionBar extends StatelessWidget {
                         Text(
                           sectionBarItems[index],
                           style: (index == sectionBarService.selectedSectionBarItem
-                                  ? Theme.of(context).textTheme.bodyLarge!
-                                  : Theme.of(context).textTheme.bodySmall!)
+                                  ? theme.textTheme.bodyLarge!
+                                  : theme.textTheme.bodySmall!)
                               .copyWith(
                                   color: index == sectionBarService.selectedSectionBarItem
-                                      ? Theme.of(context).accentColor
+                                      ? theme.accentColor
                                       : Colors.black.withOpacity(0.2),
                                   fontSize: 20),
                         ),
                         const SizedBox(height: 10),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          width: MediaQuery.of(context).size.width / 3-20,
+                          width: MediaQuery.of(context).size.width / 3 - 20,
                           height: 5,
                           decoration: BoxDecoration(
                             color: index == sectionBarService.selectedSectionBarItem
-                                ? Theme.of(context).primaryColor
+                                ? theme.primaryColor
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
                           ),

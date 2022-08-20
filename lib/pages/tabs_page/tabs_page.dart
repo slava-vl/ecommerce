@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../cart_page/cart_page.dart';
 import '../home_page/home_page.dart';
 import 'components/bottom_nav_bar.dart';
 import 'tabs_page_model.dart';
@@ -29,14 +30,29 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: controller,
-        children: const [
-          HomePage(),
-        ],
-      ),
-      bottomNavigationBar: const BottomNavBar(),
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height / 2,
+            color: Theme.of(context).accentColor,
+          ),
+        ),
+        Scaffold(
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: controller,
+            children: const [
+              HomePage(),
+              CartPage(),
+              Center(child: Text('Empty Page')),
+            ],
+          ),
+          bottomNavigationBar: const BottomNavBar(),
+        ),
+      ],
     );
   }
 

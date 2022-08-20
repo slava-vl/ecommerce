@@ -9,6 +9,7 @@ class DetailsPageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -22,7 +23,7 @@ class DetailsPageAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 37,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: theme.accentColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(
@@ -35,7 +36,7 @@ class DetailsPageAppBar extends StatelessWidget implements PreferredSizeWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                'Zihuatanejo, Gro',
+                'Product Details',
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
@@ -44,7 +45,7 @@ class DetailsPageAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: 37,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: theme.primaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset('assets/shop.svg', color: Colors.white),

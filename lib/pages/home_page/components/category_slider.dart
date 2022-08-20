@@ -10,19 +10,16 @@ class CategorySlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final categories = context.read<HomePageViewModel>().categories;
     return Column(
       children: [
         Row(
           children: [
             const SizedBox(width: 17),
-            Text('Select Category', style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25)),
+            Text('Select Category', style: theme.textTheme.bodyLarge!.copyWith(fontSize: 25)),
             const Spacer(),
-            Text('view all',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Theme.of(context).primaryColor, fontSize: 14)),
+            Text('view all', style: theme.textTheme.bodySmall!.copyWith(color: theme.primaryColor, fontSize: 14)),
             const SizedBox(width: 30),
           ],
         ),
