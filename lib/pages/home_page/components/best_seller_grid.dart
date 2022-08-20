@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/models/best_product.dart';
-import '../../product_details_page/product_details_page.dart';
+import '../../../navigation/main_navigation_route_names.dart';
 import '../home_page_model.dart';
 
 class BestSellerGrid extends StatelessWidget {
@@ -47,7 +47,7 @@ class _BestProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage.create())),
+      onTap: () => Navigator.pushNamed(context, MainNavigationRouteNames.detailsRoute),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(

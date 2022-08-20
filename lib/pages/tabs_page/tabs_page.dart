@@ -30,29 +30,17 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height / 2,
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-        Scaffold(
-          body: PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: controller,
-            children: const [
-              HomePage(),
-              CartPage(),
-              Center(child: Text('Empty Page')),
-            ],
-          ),
-          bottomNavigationBar: const BottomNavBar(),
-        ),
-      ],
+    return Scaffold(
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: controller,
+        children: const [
+          HomePage(),
+          CartPage(),
+          Center(child: Text('Empty Page')),
+        ],
+      ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 

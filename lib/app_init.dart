@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'init_provider.dart';
+import 'navigation/main_navigation_route_names.dart';
 import 'pages/cart_page/cart_page_model.dart';
 import 'pages/home_page/home_page_model.dart';
-import 'pages/product_details_page/product_details_page_model.dart';
-import 'pages/splash_page/splash_page.dart';
 
 class AppInitialization extends StatelessWidget {
   const AppInitialization({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class AppInitialization extends StatelessWidget {
                   )
                 ],
                 child: MaterialApp(
-                  title: 'Flutter Demo',
+                  title: 'Ecommerce',
                   theme: ThemeData(
                       scaffoldBackgroundColor: const Color.fromRGBO(248, 248, 248, 1),
                       primaryColor: const Color.fromRGBO(255, 110, 78, 1),
@@ -45,7 +44,8 @@ class AppInitialization extends StatelessWidget {
                         bodyLarge: TextStyle(fontWeight: FontWeight.w700),
                         headlineLarge: TextStyle(fontWeight: FontWeight.w800),
                       )),
-                  home: const SplashPage(),
+                  routes: context.read<InitializeProvider>().navigation.routes,
+                  initialRoute: MainNavigationRouteNames.splashRoute,
                 ),
               );
             }

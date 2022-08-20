@@ -5,8 +5,12 @@ import 'data/api_client.dart';
 import 'domain/services/cart_data_service.dart';
 import 'domain/services/home_data_service.dart';
 import 'domain/services/product_detail_data_service.dart';
+import 'navigation/main_navigation.dart';
 
 class InitializeProvider with ChangeNotifier {
+  late final MainNavigation _navigation;
+  MainNavigation get navigation => _navigation;
+
   late final ApiClient _apiClient;
   ApiClient get apiClient => _apiClient;
 
@@ -20,6 +24,7 @@ class InitializeProvider with ChangeNotifier {
   CartDataSrvice get cartDataSrvice => _cartDataSrvice;
 
   Future<void> initializeApp() async {
+    _navigation = MainNavigation();
     _apiClient = ApiClient(Dio());
     _homeDataService = HomeDataService(apiClient: _apiClient);
     _productDetailDataSrvice = ProductDetailDataSrvice(apiClient: _apiClient);
